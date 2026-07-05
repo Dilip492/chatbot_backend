@@ -28,6 +28,7 @@
     "nodemon": "^3.1.14",
     "openai": "^6.44.0",
     "pdf-parse": "^2.4.5",
-    "puppeteer": "^25.1.0"
+    "puppeteer": "^25.1.0",
+    "razorpay": "^2.9.6"
   }
 }

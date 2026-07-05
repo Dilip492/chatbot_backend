@@ -19,12 +19,22 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
-    plan: {
-      type: String,
-      enum: ["free", "pro", "enterprise"],
-      default: "free",
+    subscription: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Subscription",
     },
 
+    currentPlan: {
+      type: String,
+      default: "free"
+    },
+
+    subscriptionStatus: {
+      type: String,
+      enum: ["active", "inactive", "expired"],
+      default: "active"
+    }
+    ,
     isVerified: {
       type: Boolean,
       default: false,
