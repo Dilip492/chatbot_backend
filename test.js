@@ -19,15 +19,18 @@
 // main();
 
 
-import client from "./config/openai.js";
 
-async function main() {
-  const response = await client.responses.create({
-    model: "gpt-5.5",
-    input: "Write a one-sentence bedtime story about a unicorn.",
-  });
+import OpenAI from "openai";
+ import dotenv from "dotenv";
 
-  console.log(response.output_text);
-}
+dotenv.config();
+const client = new OpenAI({
+    apiKey: process.env.GROQ_API_KEY,
+    baseURL: "https://api.groq.com/openai/v1",
+});
 
-main();
+const response = await client.responses.create({
+    model: "openai/gpt-oss-20b",
+    input: "hello i am check it is working ",
+});
+console.log(response.output_text);

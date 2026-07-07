@@ -4,13 +4,16 @@ import {
   getChatbots,
   getChatbot,
   deleteChatbot,
+  UpdateChatbot,
 } from "../controllers/chatbot.controller.js";
 
 import auth from "../middleware/auth.js";
+import { checkSubscription } from "../middleware/checkSubscriptions.js";
 
 const router = express.Router();
 
 router.post("/", auth, createChatbot);
+router.put("/update/:id", auth, UpdateChatbot);
 router.get("/", auth, getChatbots);
 router.get("/:id", auth, getChatbot);
 router.delete("/:id", auth, deleteChatbot);

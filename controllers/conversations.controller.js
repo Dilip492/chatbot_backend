@@ -32,6 +32,24 @@ export const getConversations = async (req, res) => {
                     totalMessages: { $sum: 1 },
                 },
             },
+
+            // Join with leads collection
+            {
+                $lookup: {
+                    from: "leads", // MongoDB collection name
+                    localField: "_id", // sessionId
+                    foreignField: "sessionId",
+                    as: "lead",
+                },
+            },
+
+            {
+                $unwind: {
+                    path: "$lead",
+                    preserveNullAndEmptyArrays: true,
+                },
+            },
+
             {
                 $sort: {
                     updatedAt: -1,

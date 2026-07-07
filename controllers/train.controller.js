@@ -20,9 +20,18 @@ export const trainWebsite = async (req, res) => {
             chatbotId
         );
 
+        if (!chatbot) {
+            return res.status(404).json({
+                success: false,
+                message: "Chatbot not found"
+            });
+        }
+
         const pages = await crawlWebsite(
             chatbot.websiteUrl
         );
+
+        console.log("pages output" , pages);    
 
         for (const page of pages) {
             const knowledge = await Knowledge.create({
@@ -30,7 +39,7 @@ export const trainWebsite = async (req, res) => {
                 sourceType: "website",
                 sourceUrl: page.url,
                 content: page.content,
-            });     
+            });
 
             await createEmbeddings(
                 chatbotId,

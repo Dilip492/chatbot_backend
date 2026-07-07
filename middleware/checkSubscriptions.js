@@ -8,22 +8,17 @@ export const checkSubscription =
                 req.user.id
             );
 
-        if (
-            user.currentPlan === "free"
-        ) {
+        if (user.currentPlan === "free") {
             return res.status(403).json({
                 message:
-                    "Upgrade required",
+                    "Your current plan does not allow this feature. Please upgrade to Pro or Enterprise.",
             });
         }
 
-        if (
-            user.subscriptionStatus !==
-            "active"
-        ) {
+        if (user.subscriptionStatus !== "active") {
             return res.status(403).json({
                 message:
-                    "Subscription expired",
+                    "Your subscription has expired. Please renew your plan to continue.",
             });
         }
 

@@ -65,6 +65,7 @@ export const saveLead = async (req, res) => {
         console.log(req.body);
         const {
             widgetKey,
+            sessionId,
             name,
             email,
             phone,
@@ -83,6 +84,7 @@ export const saveLead = async (req, res) => {
 
         const lead = await Lead.create({
             chatbotId: chatbot._id,
+            sessionId,
             name,
             email,
             phone,

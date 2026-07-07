@@ -7,6 +7,10 @@ const leadSchema = new mongoose.Schema(
       ref: "Chatbot",
       required: true,
     },
+    sessionId: {
+      type: String,
+      required: true,
+    },
 
     name: String,
 
