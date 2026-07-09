@@ -1,6 +1,7 @@
 import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import passport from "passport";
 import dotenv from "dotenv"
 dotenv.config();
 
@@ -90,4 +91,29 @@ export const login = async (req, res) => {
 
 export const profile = async (req, res) => {
     res.json(req.user);
+};
+
+
+
+export const googleCallback = async (req, res) => {
+    try {
+        const token = generateToken(req.user._id);
+
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+        });
+
+        res.redirect(
+            `${process.env.CLIENT_URL}/dashboard?googleLogin=true`
+        );
+    } catch (error) {
+        console.error(error);
+
+        res.redirect(
+            `${process.env.CLIENT_URL}/login?error=server_error`
+        );
+    }
 };

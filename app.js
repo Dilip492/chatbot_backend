@@ -11,7 +11,8 @@ import planRoutes from "./routes/plan.routes.js"
 import orderRoutes from "./routes/order.routes.js"
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
-
+import passport from "passport"
+import "./config/passport.js"
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -29,6 +30,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, "public")));
 
+app.use(passport.initialize());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
