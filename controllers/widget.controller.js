@@ -5,6 +5,13 @@ import Chatbot from "../models/Chatbot.js";
 import vectorSearch from "../services/vector.service.js";
 import askAI from "../services/ai.service.js";
 
+import checkEmail from "../services/emailCheck.service.js"
+
+// import disposableDomains from "disposable-email-domains-js";
+import { isDisposableEmail } from "disposable-email-domains-js";
+
+// console.log(disposableDomains);
+
 
 export const askQuestion = async (req, res) => {
     try {
@@ -61,8 +68,8 @@ export const saveLead = async (req, res) => {
 
     try {
 
-        console.log("SAVE LEAD HIT");
-        console.log(req.body);
+        // console.log("SAVE LEAD HIT");
+        // console.log(req.body);
         const {
             widgetKey,
             sessionId,
@@ -72,6 +79,28 @@ export const saveLead = async (req, res) => {
 
         } = req.body;
 
+        // console.log(disposableDomains);
+
+        //  const domain = email.split("@")[1].toLowerCase();
+
+        // if (isDisposableEmail(email)) {
+        //     return res.status(400).json({
+        //         success: false,
+        //         message: "Temporary email addresses are not allowed."
+        //     });
+        // }
+
+        const result = await checkEmail(email);
+
+        console.log("email check result", result);
+
+        if (result.email_deliverability.status !== "deliverable") {
+            return res.status(400).json({
+                success: false,
+                message: "Please enter a valid email address."
+            }); 
+        }
+
         const chatbot = await Chatbot.findOne({
             widgetKey
         });
@@ -80,6 +109,14 @@ export const saveLead = async (req, res) => {
             return res.status(404).json({
                 message: "Chatbot not found"
             });
+        }
+
+        const isleadEmail = await Lead.findOne({ email });
+
+        if (isleadEmail) {
+            return res.status(400).json({
+                message: "Email already exists. Please use diffrent"
+            })
         }
 
         const lead = await Lead.create({

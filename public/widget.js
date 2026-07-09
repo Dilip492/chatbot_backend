@@ -949,9 +949,28 @@
           phone: leadData.phone
         })
       });
+
+      const data = await response.json();
+      
       if (response.ok) {
         console.log("✅ Lead saved successfully");
       }
+      // if(response.status === 400){
+      //   console.log("email not valid" , response.message);  
+      // }
+      if (response.status === 400) {
+        console.log("❌", data.message);
+
+        addMessage(data.message, "bot");
+
+        // Ask for email again
+        leadState.currentField = "email";
+        leadState.isCollecting = true;
+
+        return;
+      }
+
+      console.log(data.message);
     } catch (error) {
       console.error("🔴 Error saving lead:", error);
     }
