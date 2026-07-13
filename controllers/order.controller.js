@@ -3,7 +3,7 @@ import razorpay from "../config/razorpay.js"
 
 import crypto from "crypto";
 import Subscription from "../models/Subscription.js";
-import User from "../models/User.js";
+import User from "../models/user.js";
 import { createNotification } from "../services/notification.service.js";
 
 export const createOrder = async (req, res) => {

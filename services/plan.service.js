@@ -1,4 +1,4 @@
-import User from "../models/User.js";
+import User from "../models/user.js";
 import Plan from "../models/plan.js";
 import Chatbot from "../models/chatbot.js";
 import Knowledge from "../models/knowledge.js";
