@@ -9,7 +9,7 @@ import dashboardRoutes from "./routes/dashboard.routes.js"
 import conversationRoutes from "./routes/conversations.routes.js"
 import planRoutes from "./routes/plan.routes.js"
 import orderRoutes from "./routes/order.routes.js"
-import notificationRoutes  from "./routes/notification.routes.js"
+import notificationRoutes from "./routes/notification.routes.js"
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
 import passport from "passport"
@@ -37,7 +37,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
     cors({
-        origin: true,
+        origin: process.env.CLIENT_URL,
         credentials: true,
     })
 );

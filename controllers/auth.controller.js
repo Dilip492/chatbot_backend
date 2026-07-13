@@ -7,6 +7,8 @@ import { createNotification } from "../services/notification.service.js";
 dotenv.config();
 
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const generateToken = (id) =>
     jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: "7d",
@@ -44,12 +46,12 @@ export const register = async (req, res) => {
             actionUrl: "/chatbots",
         });
 
-        
+
         const token = generateToken(user._id);
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -84,8 +86,8 @@ export const login = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -113,8 +115,8 @@ export const googleCallback = async (req, res) => {
 
         res.cookie("token", token, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
+            secure: true,
+            sameSite: isProduction ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
         });
 
@@ -134,8 +136,8 @@ export const googleCallback = async (req, res) => {
 export const logout = (req, res) => {
     res.clearCookie("token", {
         httpOnly: true,
-        secure: false, // true in production with HTTPS
-        sameSite: "lax",
+        secure: true, // true in production with HTTPS
+        sameSite: "none",
     });
 
     res.status(200).json({
