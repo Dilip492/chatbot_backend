@@ -1,4 +1,4 @@
-import Chat from "../models/Chat.js";
+import Chat from "../models/chat.js";
 import Chatbot from "../models/chatbot.js";
 // Chatbot
 // Chat

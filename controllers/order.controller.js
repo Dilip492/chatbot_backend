@@ -2,7 +2,7 @@ import Plan from "../models/plan.js"
 import razorpay from "../config/razorpay.js"
 
 import crypto from "crypto";
-import Subscription from "../models/Subscription.js";
+import Subscription from "../models/subscription.js";
 import User from "../models/user.js";
 import { createNotification } from "../services/notification.service.js";
 

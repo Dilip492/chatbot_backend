@@ -1,5 +1,5 @@
 import Chatbot from "../models/chatbot.js";
-import Knowledge from "../models/Knowledge.js";
+import Knowledge from "../models/knowledge.js";
 import path from "path";
 import fs from "fs";
 

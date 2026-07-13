@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const knowledgeSchema = new mongoose.Schema(
   {
-chatbotId: {
+    chatbotId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Chatbot",
       required: true,
@@ -37,4 +37,8 @@ chatbotId: {
   { timestamps: true }
 );
 
-export default mongoose.model("Knowledge", knowledgeSchema);
+const Knowledge =
+  mongoose.models.Knowledge ||
+  mongoose.model("Knowledge", knowledgeSchema);
+
+export default Knowledge;

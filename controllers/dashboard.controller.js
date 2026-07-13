@@ -1,6 +1,6 @@
 import Chatbot from "../models/chatbot.js";
-import Lead from "../models/Lead.js";
-import Chat from "../models/Chat.js";
+import Lead from "../models/lead.js";
+import Chat from "../models/chat.js";
 
 export const dashboardstats = async (req, res) => {
 
