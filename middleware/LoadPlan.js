@@ -1,6 +1,6 @@
 // middleware/loadPlan.js
 
-import User from "../models/User.js";
+import User from "../models/user.js";
 
 import Plan from "../models/plan.js";
 export default async function loadPlan(req, res, next) {
