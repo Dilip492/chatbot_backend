@@ -1,6 +1,6 @@
 import Chat from "../models/Chat.js";
 import Lead from "../models/Lead.js";
-import Chatbot from "../models/Chatbot.js";
+import Chatbot from "../models/chatbot.js";
 
 import vectorSearch from "../services/vector.service.js";
 import askAI from "../services/ai.service.js";

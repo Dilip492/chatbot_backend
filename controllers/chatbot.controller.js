@@ -1,4 +1,4 @@
-import Chatbot from "../models/Chatbot.js";
+import Chatbot from "../models/chatbot.js";
 import crypto from "crypto";
 import { createNotification } from "../services/notification.service.js";
 

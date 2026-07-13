@@ -1,4 +1,4 @@
-import Chatbot from "../models/Chatbot.js";
+import Chatbot from "../models/chatbot.js";
 import Knowledge from "../models/Knowledge.js";
 import path from "path";
 import fs from "fs";
