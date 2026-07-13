@@ -1,4 +1,4 @@
-import Knowledge from "../models/Knowledge.js";
+import Knowledge from "../models/knowledge.js";
 
 const createEmbeddings = async (chatbotId, knowledgeId, content) => {
     const chunks = [];

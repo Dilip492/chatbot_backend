@@ -1,4 +1,4 @@
-import Knowledge from "../models/Knowledge.js";
+import Knowledge from "../models/knowledge.js";
 
 const vectorSearch = async (chatbotId, question) => {
     const docs = await Knowledge.find({
