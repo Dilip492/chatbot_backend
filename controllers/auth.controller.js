@@ -1,8 +1,9 @@
-import User from "../models/User.js";
+import User from "../models/user.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import passport from "passport";
 import dotenv from "dotenv"
+import { createNotification } from "../services/notification.service.js";
 dotenv.config();
 
 
@@ -33,6 +34,17 @@ export const register = async (req, res) => {
             email,
             password: hashedPassword,
         });
+
+        // createNotification
+        await createNotification({
+            user: user._id,
+            type: "info",
+            title: "Welcome 👋",
+            message: "Create your first chatbot.",
+            actionUrl: "/chatbots",
+        });
+
+        
         const token = generateToken(user._id);
         res.cookie("token", token, {
             httpOnly: true,

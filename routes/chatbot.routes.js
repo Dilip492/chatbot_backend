@@ -9,10 +9,11 @@ import {
 
 import auth from "../middleware/auth.js";
 import { checkSubscription } from "../middleware/checkSubscriptions.js";
+import loadPlan from "../middleware/LoadPlan.js";
 
 const router = express.Router();
 
-router.post("/", auth, createChatbot);
+router.post("/", auth, loadPlan, createChatbot);
 router.put("/update/:id", auth, UpdateChatbot);
 router.get("/", auth, getChatbots);
 router.get("/:id", auth, getChatbot);

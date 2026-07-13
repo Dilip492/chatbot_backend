@@ -9,6 +9,7 @@ import extractDocxText from "../services/docs.service.js";
 import extractPdfText from "../services/pdf.service.js";
 import crawlWebsite from "../services/crawler.service.js";
 import createEmbeddings from "../services/embedding.service.js";
+import { createNotification } from "../services/notification.service.js";
 
 export const trainWebsite = async (req, res) => {
     try {
@@ -31,7 +32,7 @@ export const trainWebsite = async (req, res) => {
             chatbot.websiteUrl
         );
 
-        console.log("pages output" , pages);    
+        console.log("pages output", pages);
 
         for (const page of pages) {
             const knowledge = await Knowledge.create({
@@ -47,6 +48,15 @@ export const trainWebsite = async (req, res) => {
                 page.content
             );
         }
+
+        // createNotification
+        await createNotification({
+            user: req.user._id,
+            type: "success",
+            title: "Website Training Completed",
+            message: "Your chatbot is ready to answer questions.",
+            actionUrl: `/train/${chatbotId}`,
+        });
 
         res.json({
             success: true,
@@ -120,6 +130,14 @@ export const trainFile = async (req, res) => {
             knowledge._id,
             content
         );
+        
+        await createNotification({
+            user: req.user._id,
+            type: "success",
+            title: "Document Trained Completed",
+            message: "Your chatbot is ready to answer questions.",
+            actionUrl: `/train/${chatbotId}`,
+        });
 
         res.json({
             success: true,
@@ -157,6 +175,14 @@ export const trainText = async (req, res) => {
             knowledge._id,
             customText
         );
+
+        await createNotification({
+           user: req.user._id,
+            type: "success",
+            title: "Knowledge Added Completed",
+            message: "Your chatbot is ready to answer questions.",
+            actionUrl: "/train/",
+        });
 
         res.status(200).json({
             success: true,

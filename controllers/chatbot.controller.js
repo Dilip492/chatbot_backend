@@ -1,6 +1,9 @@
 import Chatbot from "../models/Chatbot.js";
 import crypto from "crypto";
+import { createNotification } from "../services/notification.service.js";
 
+
+// createNotification
 export const createChatbot = async (req, res) => {
 
     const { chatbotName, websiteUrl, welcomeMessage, themeColor, status } = req.body;
@@ -23,6 +26,14 @@ export const createChatbot = async (req, res) => {
             themeColor,
             status
 
+        });
+
+        await createNotification({
+            user: req.user._id,
+            type: "success",
+            title: "Chatbot Created",
+            message: `${chatbot.chatbotName} is ready.`,
+            actionUrl: "/chatbots",
         });
 
         res.status(201).json(chatbot);
@@ -74,6 +85,14 @@ export const UpdateChatbot = async (req, res) => {
 
         const updatedChatbot = await chatbot.save();
 
+        await createNotification({
+            user: req.user._id,
+            type: "info",
+            title: "Chatbot Updated",
+            message: "Changes saved successfully.",
+            actionUrl: "/chatbots",
+        });
+
         res.status(200).json({
             success: true,
             message: "Chatbot updated successfully",
@@ -111,6 +130,13 @@ export const deleteChatbot = async (req, res) => {
     await Chatbot.findByIdAndDelete(
         req.params.id
     );
+
+    await createNotification({
+        user: req.user._id,
+        type: "warning",
+        title: "Chatbot Deleted",
+        message: `${Chatbot.chatbotName} has been deleted.`,
+    });
 
     res.json({
         success: true,

@@ -1,7 +1,9 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 import User from "../models/User.js"
+// createNotification
 import dotenv from "dotenv"
+import { createNotification } from "../services/notification.service.js";
 dotenv.config();
 
 // const passport = require('passport');
@@ -57,8 +59,17 @@ passport.use(
                 });
 
                 await newUser.save();
+
+                await createNotification({
+                    user: newUser._id,
+                    type: "info",
+                    title: "Welcome 👋",
+                    message: "Create your first chatbot.",
+                    actionUrl: "/chatbots",
+                });
+
                 return done(null, newUser);
-                
+
             } catch (error) {
                 console.error('Google Strategy Error:', error);
                 return done(error, null);

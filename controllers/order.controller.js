@@ -4,6 +4,7 @@ import razorpay from "../config/razorpay.js"
 import crypto from "crypto";
 import Subscription from "../models/Subscription.js";
 import User from "../models/User.js";
+import { createNotification } from "../services/notification.service.js";
 
 export const createOrder = async (req, res) => {
     const { planName } = req.body;
@@ -76,6 +77,15 @@ export const verifyPayment = async (req, res) => {
                 30 * 24 * 60 * 60 * 1000
             ),
         });
+
+    // createNotification
+    await createNotification({
+        user: req.user._id,
+        type: "success",
+        title: "Payment Successful",
+        message: `Welcome to the ${planName} Plan.`,
+        actionUrl: "/billing",
+    });
 
     await User.findByIdAndUpdate(
         req.user._id,

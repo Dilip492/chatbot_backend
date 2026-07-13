@@ -9,6 +9,7 @@ import dashboardRoutes from "./routes/dashboard.routes.js"
 import conversationRoutes from "./routes/conversations.routes.js"
 import planRoutes from "./routes/plan.routes.js"
 import orderRoutes from "./routes/order.routes.js"
+import notificationRoutes  from "./routes/notification.routes.js"
 import connectDB from "./config/db.js";
 import cookieParser from "cookie-parser";
 import passport from "passport"
@@ -53,6 +54,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/conversations", conversationRoutes)
 app.use("/api", planRoutes)
 app.use("/api/order", orderRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 app.get("/", (req, res) => {
     res.status(200).json({

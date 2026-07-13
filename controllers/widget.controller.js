@@ -9,6 +9,7 @@ import checkEmail from "../services/emailCheck.service.js"
 
 // import disposableDomains from "disposable-email-domains-js";
 import { isDisposableEmail } from "disposable-email-domains-js";
+import { createNotification } from "../services/notification.service.js";
 
 // console.log(disposableDomains);
 
@@ -98,7 +99,7 @@ export const saveLead = async (req, res) => {
             return res.status(400).json({
                 success: false,
                 message: "Please enter a valid email address."
-            }); 
+            });
         }
 
         const chatbot = await Chatbot.findOne({
@@ -126,6 +127,15 @@ export const saveLead = async (req, res) => {
             email,
             phone,
 
+        });
+        // createNotification
+
+        await createNotification({
+            user: req.user._id,
+            type: "success",
+            title: "New Lead",
+            message: `${lead.name} submitted their details.`,
+            actionUrl: "/leads",
         });
 
         res.status(201).json(lead);
