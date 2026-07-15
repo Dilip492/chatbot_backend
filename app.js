@@ -35,6 +35,9 @@ app.use(passport.initialize());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api/widget", cors({
+    origin: "*",
+}), widgetRoutes);
 app.use(
     cors({
         origin: process.env.CLIENT_URL,
@@ -49,7 +52,7 @@ const PORT = process.env.PORT || 5000;
 app.use("/api/auth", userRoutes);
 app.use("/api/chatbots", chatbotRoutes);
 app.use("/api/train", trainRoutes);
-app.use("/api/widget", widgetRoutes);
+
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/conversations", conversationRoutes)
 app.use("/api", planRoutes)
