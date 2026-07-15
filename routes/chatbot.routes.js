@@ -10,6 +10,7 @@ import {
 import auth from "../middleware/auth.js";
 import { checkSubscription } from "../middleware/checkSubscriptions.js";
 import loadPlan from "../middleware/LoadPlan.js";
+import { getLeads } from "../controllers/widget.controller.js";
 
 const router = express.Router();
 
@@ -18,5 +19,7 @@ router.put("/update/:id", auth, UpdateChatbot);
 router.get("/", auth, getChatbots);
 router.get("/:id", auth, getChatbot);
 router.delete("/:id", auth, deleteChatbot);
+
+router.get('/getleads', auth, getLeads);
 
 export default router;

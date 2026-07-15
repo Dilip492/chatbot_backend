@@ -1,7 +1,7 @@
-  import express from "express";
+import express from "express";
 import {
   askQuestion,
-  getLeads,
+  // getLeads,
   getWidgetConfig,
   saveLead,
 } from "../controllers/widget.controller.js";
@@ -12,8 +12,8 @@ const router = express.Router();
 router.post("/ask", askQuestion);
 router.post("/lead", saveLead);
 
-
-router.get('/getleads', auth, getLeads)
+// remove the this route 
+// router.get('/getleads', auth, getLeads)
 
 
 router.get('/config/:widgetKey', getWidgetConfig);
