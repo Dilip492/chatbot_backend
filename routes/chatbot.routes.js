@@ -13,6 +13,7 @@ import loadPlan from "../middleware/LoadPlan.js";
 import { getLeads } from "../controllers/widget.controller.js";
 
 const router = express.Router();
+router.get('/getleads', auth, getLeads);
 
 router.post("/", auth, loadPlan, createChatbot);
 router.put("/update/:id", auth, UpdateChatbot);
@@ -20,6 +21,5 @@ router.get("/", auth, getChatbots);
 router.get("/:id", auth, getChatbot);
 router.delete("/:id", auth, deleteChatbot);
 
-router.get('/getleads', auth, getLeads);
 
 export default router;
