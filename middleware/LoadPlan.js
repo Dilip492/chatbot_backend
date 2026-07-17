@@ -1,20 +1,26 @@
 // middleware/loadPlan.js
 
-import User from "../models/user.js";
-
 import Plan from "../models/plan.js";
+
 export default async function loadPlan(req, res, next) {
+    try {
 
-    const user = await User.findById(req.user.id).populate("subscription")
+        const plan = await Plan.findOne({
+            name: req.user.currentPlan,
+            active: true
+        });
 
-    const plan = await Plan.findOne({
-        name: user.currentPlan
-    });
+        if (!plan) {
+            return res.status(404).json({
+                message: "Plan not found",
+            });
+        }
 
-    // console.log("user", user.subscription);
-    req.user = user;
-    req.plan = plan;
-    // console.log("plan", req.plan);
+        req.plan = plan;
 
-    next();
+
+        next();
+    } catch (error) {
+        next(error);
+    }
 }

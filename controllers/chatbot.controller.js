@@ -16,7 +16,6 @@ export const createChatbot = async (req, res) => {
             });
         }
 
-
         const chatbot = await Chatbot.create({
             userId: req.user._id,
             chatbotName,
