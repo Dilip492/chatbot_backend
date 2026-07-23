@@ -130,18 +130,18 @@ export const saveLead = async (req, res) => {
         });
         // createNotification
 
-        await createNotification({
-            user: req.user._id,
-            type: "success",
-            title: "New Lead",
-            message: `${lead.name} submitted their details.`,
-            actionUrl: "/leads",
-        });
+        // await createNotification({
+        //     user: req.user._id,
+        //     type: "success",
+        //     title: "New Lead",
+        //     message: `${lead.name} submitted their details.`,
+        //     actionUrl: "/leads",
+        // });
 
         res.status(201).json(lead);
 
     } catch (error) {
-        console.log("error:", error.message)
+        console.log("error while saving lead:", error.message)
         res.status(500).json({
             message: error.message
         });

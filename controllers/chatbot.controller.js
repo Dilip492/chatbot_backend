@@ -126,7 +126,7 @@ export const getChatbot = async (req, res) => {
 };
 
 export const deleteChatbot = async (req, res) => {
-    await Chatbot.findByIdAndDelete(
+    const chatbot = await Chatbot.findByIdAndDelete(
         req.params.id
     );
 
@@ -134,7 +134,7 @@ export const deleteChatbot = async (req, res) => {
         user: req.user._id,
         type: "warning",
         title: "Chatbot Deleted",
-        message: `${Chatbot.chatbotName} has been deleted.`,
+        message: `${chatbot.chatbotName} has been deleted.`,
     });
 
     res.json({

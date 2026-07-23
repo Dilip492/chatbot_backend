@@ -102,3 +102,43 @@ export const verifyPayment = async (req, res) => {
         success: true,
     });
 };
+
+
+export const getbilling = async (req, res) => {
+    
+    res.json({
+
+        success: true,
+
+        subscription: {
+
+            status: req.subscription?.status || "free",
+
+            startDate: req.subscription?.startDate,
+
+            endDate: req.subscription?.endDate,
+
+            amount: req.subscription?.amount || 0,
+
+            plan: req.plan.name
+
+        },
+
+        paymentHistory: [
+
+            {
+
+                amount: req.subscription?.amount,
+
+                paymentId: req.subscription?.razorpayPaymentId,
+
+                date: req.subscription?.createdAt,
+
+                status: req.subscription?.status
+
+            }
+
+        ]
+
+    });
+}
