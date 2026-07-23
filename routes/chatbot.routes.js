@@ -12,7 +12,7 @@ import { checkSubscription } from "../middleware/checkSubscriptions.js";
 import loadPlan from "../middleware/LoadPlan.js";
 import { getLeads } from "../controllers/widget.controller.js";
 import loadSubscription from "../middleware/LoadSubscriptions.js";
-import checkLimit from "../middleware/Checklimit.js";
+import checkLimit from "../middleware/checklimit.js";
 
 const router = express.Router();
 
