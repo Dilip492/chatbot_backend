@@ -58,9 +58,9 @@ import { hexToRgb } from './utils/helpers.js';
   function applyColors(color) {
     const buttonEl = domManager.getElement('button');
     const sendBtn = domManager.getElement('sendBtn');
-    const header = domManager.shadowRoot.querySelector(".header");
+    const header_unique = domManager.shadowRoot.querySelector(".header-unique");
 
-    console.log("header" , header)
+    // console.log("header-unique" , header-unique)
     
     if (buttonEl) {
       buttonEl.style.background = color;
@@ -72,8 +72,8 @@ import { hexToRgb } from './utils/helpers.js';
       sendBtn.style.boxShadow = `0 3px 10px ${color}4D`;
     }
 
-    if (header) {
-      header.style.background = `linear-gradient(135deg, ${color}, ${color})`;
+    if (header_unique) {
+      header_unique.style.background = `linear-gradient(135deg, ${color}, ${color})`;
     }
   }
 

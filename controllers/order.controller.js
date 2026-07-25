@@ -115,7 +115,7 @@ export const getbilling = async (req, res) => {
             status: req.subscription?.status || "free",
 
             startDate: req.subscription?.startDate,
-
+            
             endDate: req.subscription?.endDate,
 
             amount: req.subscription?.amount || 0,

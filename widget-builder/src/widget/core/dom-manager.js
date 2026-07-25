@@ -81,7 +81,7 @@ export class DOMManager {
 
     createHeader() {
         const header = document.createElement("div");
-        header.className = "header";
+        header.className = "header-unique";
 
         const avatarWrap = document.createElement("div");
         avatarWrap.className = "avatar";
@@ -111,7 +111,7 @@ export class DOMManager {
         titleWrapper.appendChild(statusRow);
 
         const headerActions = document.createElement("div");
-        headerActions.className = "header-actions";
+        headerActions.className = "header-unique-actions";
 
         const moreBtn = document.createElement("button");
         moreBtn.innerHTML = icons.more;

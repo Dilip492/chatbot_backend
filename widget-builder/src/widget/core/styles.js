@@ -1,4 +1,4 @@
-// core/styles.js
+/* core/styles.js - Fixed version */
 export const styles = `
   * {
     margin: 0;
@@ -73,7 +73,7 @@ export const styles = `
     display: flex;
   }
 
-  .header {
+  .header-unique {
     padding: 12px 16px;
     border-bottom: 1px solid rgba(99, 102, 241, 0.1);
     display: flex;
@@ -83,7 +83,7 @@ export const styles = `
     
   }
 
-  .header .avatar {
+  .header-unique .avatar {
     width: 34px;
     height: 34px;
     border-radius: 50%;
@@ -97,32 +97,32 @@ export const styles = `
     flex-shrink: 0;
   }
 
-  .header .avatar svg {
+  .header-unique .avatar svg {
     width: 18px;
     height: 18px;
   }
 
-  .header .title-wrapper {
+  .header-unique .title-wrapper {
     display: flex;
     flex-direction: column;
     flex: 1;
     gap: 1px;
   }
 
-  .header .title {
+  .header-unique .title {
     font-weight: 600;
     font-size: 0.9rem;
     color: white;
     letter-spacing: -0.2px;
   }
 
-  .header .status-row {
+  .header-unique .status-row {
     display: flex;
     align-items: center;
     gap: 5px;
   }
 
-  .header .status-dot {
+  .header-unique .status-dot {
     display: inline-block;
     width: 5px;
     height: 5px;
@@ -132,18 +132,18 @@ export const styles = `
     animation: pulse-dot 2s infinite;
   }
 
-  .header .status-text {
+  .header-unique .status-text {
     font-size: 0.6rem;
     color: rgba(255,255,255,0.8);
     font-weight: 400;
   }
 
-  .header .header-actions {
+  .header-unique .header-unique-actions {
     display: flex;
     gap: 2px;
   }
 
-  .header .header-actions button {
+  .header-unique .header-unique-actions button {
     background: rgba(255,255,255,0.1);
     border: none;
     color: white;
@@ -157,11 +157,11 @@ export const styles = `
     justify-content: center;
   }
 
-  .header .header-actions button:hover {
+  .header-unique .header-unique-actions button:hover {
     background: rgba(255,255,255,0.2);
   }
 
-  .header .header-actions button svg {
+  .header-unique .header-unique-actions button svg {
     width: 16px;
     height: 16px;
     display: block;
@@ -195,21 +195,33 @@ export const styles = `
 
   .message {
     animation: slideIn 0.25s ease-out forwards;
+    display: flex;
+    width: 100%;
   }
 
   .message .wrapper {
     display: flex;
     gap: 8px;
+    align-items: flex-start;
+  }
+
+  /* Bot messages - left aligned */
+  .message.bot {
+    justify-content: flex-start;
   }
 
   .message.bot .wrapper {
     max-width: 85%;
-    align-self: flex-start;
+    flex-direction: row;
+  }
+
+  /* User messages - right aligned with avatar on right */
+  .message.user {
+    justify-content: flex-end;
   }
 
   .message.user .wrapper {
-    max-width: 100%;
-    align-self: flex-end;
+    max-width: 85%;
     flex-direction: row-reverse;
   }
 
@@ -223,6 +235,7 @@ export const styles = `
     font-size: 12px;
     font-weight: 500;
     flex-shrink: 0;
+    flex-shrink: 0;
   }
 
   .message.bot .avatar {
@@ -233,7 +246,7 @@ export const styles = `
   .message.user .avatar {
     background: rgba(99, 102, 241, 0.1);
     border: 1px solid rgba(99, 102, 241, 0.2);
-    color: #6366f1;
+    color: #475569;
   }
 
   .message .avatar svg {
@@ -250,6 +263,7 @@ export const styles = `
     word-break: break-word;
     position: relative;
     flex: 1;
+    min-width: 0; /* Prevents overflow */
   }
 
   .message.bot .bubble {
@@ -261,9 +275,9 @@ export const styles = `
 
   .message.user .bubble {
     border-top-right-radius: 4px;
-    background: rgba(99, 102, 241, 0.1);
+    background: #f1f5f9;
     color: #0f172a;
-    border: 1px solid rgba(99, 102, 241, 0.2);
+    border: 1px solid #e2e8f0;
   }
 
   .message .bubble .time {
@@ -302,12 +316,16 @@ export const styles = `
 
   .typing-indicator {
     align-self: flex-start;
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
   }
 
   .typing-indicator .wrapper {
     display: flex;
     gap: 8px;
     max-width: 85%;
+    align-items: flex-start;
   }
 
   .typing-indicator .avatar {
@@ -399,11 +417,7 @@ export const styles = `
     transition: border-color 0.15s, box-shadow 0.15s;
   }
 
-  .input-wrapper:focus-within {
-    border-color: #6366f1;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-  }
-
+ 
   .input-wrapper .emoji-btn {
     background: transparent;
     border: none;
